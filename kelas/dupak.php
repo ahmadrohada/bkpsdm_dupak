@@ -11,13 +11,13 @@ $id_tu		 	= isset($_SESSION['id_user']) ? $_SESSION['id_user'] : '';
 $op=isset($_GET['op'])?$_GET['op']:null;
 
 
-/**  ===================== PROSES PENGISIAN DUPAKOLEH TE UUUU ============== 
+/* ===================== PROSES PENGISIAN DUPAKOLEH TE UUUU ============== 
 update 	= untuk update step setelah satu  sub di isi 
 simpan	= memulai pengisian dupak oleh TU
 load	= pengambilan dAta dupak untuk dimasukan ke form
 add		= tambah data sub dupak
 
-/// ======================================================================== */
+======================================================================== */
 
 
 
@@ -29,9 +29,9 @@ if($op=='simpan_dupak'){
 	Connect::getConnection();
 	$id_pegawai = $_GET['id_pegawai'];
 
-	/** ********************************************************************************** //
-	// -------------------- PROSES GENERATE NO DUPAK AJUAN ---------------------------------//
-	/** ================================================================================= */
+	/* ********************************************************************************** 
+	-------------------- PROSES GENERATE NO DUPAK AJUAN ---------------------------------
+	================================================================================= */
 
 		//$th 			= date(Y);
 
@@ -92,6 +92,7 @@ if($op=='simpan_dupak'){
 	if ( ( $cek1 == 0  ) & ( $cek2 == 0  ) )	{
 	//input ke tabel DUPAK-Pribadi
 	$x= array(
+		'id'					=> '',
 		'no_dupak'				=> $no_dupak_ajuan,
 		'id_pegawai'			=> $_GET['id_pegawai'],
 		'id_tu'					=> $_SESSION['id_user'],
@@ -219,9 +220,12 @@ if($op=='simpan_dupak'){
 				'id_pegawai'			=> $_GET['id_pegawai'],
 				);
 				$pak->TambahDataDupak('tb_dupak_guru_f',$y);
+
+
+				//cari id dupak nya
+				$d_id = mysql_fetch_object(mysql_query("SELECT id FROM dt_dupak WHERE no_dupak = '$no_dupak_ajuan' "));
 				
-				
-			echo "sukses|".$no_dupak_ajuan."|".$_GET['id_pegawai']."|1";
+			echo "sukses|".$d_id->id."|".$_GET['id_pegawai']."|1";
 		}else{
 			echo $q1;
 		}

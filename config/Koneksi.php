@@ -3,9 +3,9 @@ class Connect {
 	protected static $_connection;
 	public static function getConnection(){
 		if(!self::$_connection){
-			$dbhost = 'localhost';
-			$dbuser = 'root';
-			$dbpassword = '';
+			$dbhost = '10.1.1.1:1946';
+			$dbuser = 'pak';
+			$dbpassword = 'Pak123!@#';
 			$dbname ='pak_baru';
 			self::$_connection = @mysql_connect($dbhost, $dbuser, $dbpassword);
 			if(!self::$_connection){
@@ -24,7 +24,7 @@ class Connect {
 			$dbhost = 'localhost';
 			$dbuser = 'root';
 			$dbpassword = '';
-			$dbname ='pak_baru';
+			$dbname ='db_opak';
 			self::$_connection = @mysql_connect($dbhost, $dbuser, $dbpassword);
 			if(!self::$_connection){
 				throw new Exception('Gagal melalukan koneksi ke database. '.mysql_error());

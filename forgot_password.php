@@ -7,7 +7,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <meta name="description" content="Pengisian DUPAK online . Halaman web yang digunakan untuk melakukan pengisian DUPAK secara online" />
 <meta name="keywords" content="sipulpenpakguru,sipulpen,dupak,bkd karawang,pns,penilaian,angka kredit,simpak,dupak karawang,dupak online" />
-<meta name="author" content="BKD Kab Karawang" /> 
+<meta name="author" content="BKPSDM Kab Karawang" /> 
 <meta name="subject" content="Aplikasi berbasis web untuk pengajuan DUPAK" />
 
 
@@ -27,88 +27,48 @@
 
 <script type="text/javascript">
 $(function(){
-	//alert();
-	//$(document).pngFix( );
-	$(".cek_login").hide();
-	$(".error_login").hide();
-	$(".sukses_login").hide();
 	
-	$("#nama_user").click(function(){
-		$(".cek_login").delay(80).fadeOut();
-		$(".error_login").delay(80).fadeOut();
-		$(".sukses_login").delay(80).fadeOut();
-	});
-	
-	$('#nama_user').keyup(function(e) {
-          if(e.keyCode == 13) {
-				$('#kata_sandi').focus().select();
-          }
-    });
-	
-	$('#kata_sandi').keyup(function(e) {
-          if(e.keyCode == 13) {
-            login();
-          }
-    });
 	
 	$("#login").click(function(){
-		 login();
+		window.location.assign("index.php");
 	});	
 
-	$(".lupa_password").click(function(){
-		//window.location.assign("forgot_password.php");
-	});	
-	
-	function login(){
+	$(".reset_password").click(function(){
+		//alert()
 		nama_user 	= $("#nama_user").val();
-		kata_sandi	= $("#kata_sandi").val();
-		//alert(nama_user);
-		
-		if (nama_user == ""){
-			
-			alert ("Nama Pengguna/user masih kosong");
-			$("#nama_user").focus();
-		} else if (kata_sandi == "") {
-			alert ("Kata Sandi masih kosong");
-			$("#kata_sandi").focus();
-		} else {
-			$(".cek_login").delay(100).fadeIn();
-		
-			$.ajax({
-						url:"./kelas/login_handler.php",
-						method:"POST",
-                        data:"op=cek_login&nama_user="+nama_user+
-												"&kata_sandi="+kata_sandi,
+		email		= $("#email").val();
+		$.ajax({
+			url:"./kelas/forgot_password_handler.php",
+			method:"POST",
+            data:"op=forgot-password&nama_user="+nama_user+"&email="+email,
 
-                        cache:false,
-                        success:function(msg){
-							//alert(msg);
-							data=msg.split("|");
+            cache:false,
+            success:function(msg){
+				//alert(msg);
+				data=msg.split("|");
 							
-							if ( data[0] == "error" ) {
-								$(".cek_login").hide();
-								$(".error_login").delay(60).fadeIn();
+				if ( data[0] == "error" ) {
+					$(".cek_login").hide();
+					$(".error_login").delay(60).fadeIn();
 							
-							} else if (data[0] == "sukses"){
-								$(".cek_login").hide();
-								$(".sukses_login").delay(30).fadeIn();
-								
-								//window.location.href="home.php?page=dashboard";
-								window.location.assign("?page=dashboard");
+				} else if (data[0] == "sukses"){
+					$(".cek_login").hide();
+					$(".sukses_login").delay(30).fadeIn();
+					//window.location.href="home.php?page=dashboard";
+					window.location.assign("?page=dashboard");
 							
-							}
+				}
 							
 
-                        }
-                    })
-		}
+            }
+        })
+	});	
 	
-	}
-	
-	
+
 	
 	
-	});
+					
+});
 </script>
 </head>
 <body id="login-bg" > 
@@ -124,21 +84,18 @@ if ( !isset($_SESSION['id_user'])){
 	<div class="clear"></div>
 	<!--  start loginbox ................................................................................. -->
 	<div id="loginbox">
-	<p id="alert_login" class="cek_login">Mencari data User pada database</p>
-	<p id="alert_login" class="error_login">Data User tidak ditemukan</p>
-	<p id="alert_login" class="sukses_login">Login Berhasil</p>
 	<!--  start login-inner -->
 	<div id="login-inner">
 	<form id="login-form">
     	<label>NAMA USER</label>
 		<input type="text" id="nama_user" class="login_input"><br>
-		<label>PASSWORD</label>
-		<input type="password" id="kata_sandi" onkeypress='return pass(event)' style="margin-left:12px;" class="login_input"><br>
+		<label>EMAIL &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
+		<input type="text" id="email" style="margin-left:12px;" class="login_input"><br>
 
 		
 		<input type="button" id="login" class="button_login" />
 		<div style="float:right; margin-right:40px; margin-top:10px;">
-		<a href="#" class="lupa_password">lupa password ?</a>
+		<button class="btn btn-block reset_password">RESET</button>
 		</div>
 		
 	</form>

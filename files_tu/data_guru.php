@@ -24,7 +24,9 @@ $(".input").click(function(){
 						3. Bukan termasuk guru dari sekolah anda
 						
 						**/
-						if ( data[0] == 0 ){
+
+						//mengijiknkan bikin dupak beberapa periode sekaligus
+						/* if ( data[0] == 0 ){
 							window.location.assign("?page=form_dupak&id_pegawai="+id_pegawai);
 						} 
 						if ( data[0] == 1 ){
@@ -34,11 +36,12 @@ $(".input").click(function(){
 						if ( data[0] == 2 ){
 							proses_penilai(data[1]);
 								
-						}
+						} */
+
+
 						if ( data[0] == 3 ){
 							bukan_guru_anda();
-						}
-						if ( data[0] == 4 ){
+						}else if ( data[0] == 4 ){
 							$("#alert").html(
 								"<center><span class='ui-icon ui-icon-alert' style='float:left; margin:0 0 10px 5px;'></span>"
 								+"NIP Pegawai Salah / Tidak Aktif</center>"
@@ -54,6 +57,8 @@ $(".input").click(function(){
 									}
 								}
 							});
+						}else{
+							window.location.assign("?page=new_dupak&id_pegawai="+id_pegawai);
 						}
 						
 						
