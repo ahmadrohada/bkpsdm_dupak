@@ -1,0 +1,194 @@
+
+/*  ======================= TABLE DATA ATRIBUT  ===================================== */
+/*  =========================== ============== ====================================== */
+table.data {
+	margin:0px 0 7px;
+	border-collapse:collapse;
+	border:1px solid #FFF8F8;
+	color:#062656;
+}
+
+
+table.data td{
+	font:normal 11.7px Verdana,Arial,Sans-Serif;
+	padding:6px 6px 6px 6px;
+	vertical-align:center;
+	border:1px solid #FFF8F8;
+}
+
+table.data th{
+
+vertical-align:center;
+padding:7px 5px;
+border:1px solid #FFF8F8;
+background:-moz-linear-gradient(top, #c7c7c7,#2b2b2b);
+background:-webkit-linear-gradient(top, #c7c7c7,#2b2b2b);
+color:#fff;
+font-weight:bold;
+font-size:13px;
+text-shadow: black 0.1em 0.1em 0.2em;
+}
+
+
+
+
+table.data tr:nth-child(odd) {
+background:#e8e8e8;
+
+}
+
+table.data tr:nth-child(even) {
+background:#d9d9d9;
+}
+
+
+.table-hover tbody tr:hover td,
+.table-hover tbody tr:hover th {
+	background-color:#bababa;
+	//color:#fff;
+	//text-shadow: black 0.1em 0.1em 0.2em;
+	/** cursor:pointer; **/
+}
+
+/*  ======================= TABLE FORM ATRIBUT  ===================================== */
+/*  =========================== ============== ====================================== */
+table.form {	background:#ebebeb;
+	margin:0px 0 5px 10px;
+	border-collapse:collapse;
+	border:1px solid #c4c4c4;
+	color:#062656;
+	font:normal 11px Verdana,Arial,Sans-Serif;
+}
+
+
+table.form td{
+	border-collapse:collapse;
+	border:1px solid #c4c4c4;
+	padding:5px 5px 5px 3px;
+	vertical-align:center;
+}
+tx.form{
+	border:0px solid #c4c4c4;
+	padding:5px 5px 5px 3px;
+	vertical-align:center;
+}
+
+table.form th{
+vertical-align:center;
+padding:7px 5px;
+border:1px solid #c4c4c4;
+background:-moz-linear-gradient(top, #c7c7c7,#2b2b2b);
+background:-webkit-linear-gradient(top, #c7c7c7,#2b2b2b);
+color:#fff;
+font-weight:bold;
+font-size:13px;
+text-shadow: black 0.1em 0.1em 0.2em;
+}
+
+/*  ======================= TABLE DETAIL ATRIBUT  ===================================== *//*  =========================== ============== ====================================== */table.detail {	background:#ebebeb;	border-collapse: separate;	border:1px solid #c4c4c4;	color:#062656;	font:normal 11px Verdana,Arial,Sans-Serif;	padding:5px 5px 5px 3px;}table.detail td{	border-collapse:collapse;	border:1px solid #c4c4c4;	padding:5px 5px 5px 3px;	vertical-align:center;}tx.detail{	border:0px solid #c4c4c4;	padding:5px 5px 5px 3px;	vertical-align:center;}table.detail th{vertical-align:center;padding:7px 5px;border:1px solid #c4c4c4;background:-moz-linear-gradient(top, #c7c7c7,#2b2b2b);background:-webkit-linear-gradient(top, #c7c7c7,#2b2b2b);color:#fff;font-weight:bold;font-size:13px;text-shadow: black 0.1em 0.1em 0.2em;}
+
+/*  ======================= TABLE CETAK ATRIBUT  ===================================== */
+/*  =========================== ============== ====================================== */
+table.form_cetak {
+	width:1200px;
+	margin:auto;
+	
+	color:black;
+}
+table.form_cetak td {
+line-height:42pt;
+}
+
+table.kop {
+	width:1020px;
+	margin:auto;
+	border-collapse:collapse;
+	color:black;
+}
+table.tg_cetak {
+	width:1020px;
+	margin:auto;
+	color:black;
+}
+
+
+
+hr.kop_hr{
+	margin-top:-45px;
+	border:2px solid black;
+}
+
+table.form_cetak td{
+		font:normal 12pt Verdana,Arial,Sans-Serif;
+		padding:5px 6px 5px 6px;
+		vertical-align:center;
+		
+		color:black;
+}
+
+table.kop td{
+		font:normal 12pt Sans-Serif;
+		Line-height:18pt;
+}
+
+
+table.form_cetak th{
+		vertical-align:center;
+		padding:5px 0px 5px 0px;
+		border:1px solid black;
+		color:black;
+		font-weight:normal;
+		font-size:12pt;
+}
+
+th.tengah{
+		vertical-align:center;
+		padding:5px 0px 5px 0px;
+		color:black;
+		font-weight:bold;
+		font-size:13px;
+}
+
+table.form_cetak td.tengah {
+	vertical-align:center;
+	text-align: right;
+}
+
+
+table.form_cetak td.nilai{
+	text-align:right;
+	font-weight:bold;
+	padding-right:10px;
+}
+
+/** data form **/
+table.data_form {
+	margin:0px 0 5px 12px;
+	color:#062656;	border-collapse:collapse;
+}
+
+
+table.data_form td{
+	font:normal 11.7px Verdana,Arial,Sans-Serif;
+	padding:5px 0px 5px 6px;
+}
+
+
+table.data_form td.isi, td.isi{
+font-weight:bold;
+}
+
+table.rincian {
+	border:0px ;
+}
+
+table.rincian td {
+	border:0px ;
+	padding:6px 0 0 0;
+	font:normal 11pt Sans-Serif;
+
+}
+
+/*  ======================= TABLE FORM ATRIBUT  ===================================== *//*  =========================== ============== ====================================== */table.keg_dupak {	background:#fafafa;	margin:auto;	border-collapse:collapse !important;	border:1px solid black;	color:black;	font:normal 12pt Arial,Sans-Serif;	width:1010px;}table.keg_dupak td{	border-collapse:collapse;	border:1px solid black;	padding:5px 5px 5px 13px;	vertical-align:center;	}table.keg_dupak td.isi{	font:bold 13pt Arial,Sans-Serif;}table.keg_dupak th{vertical-align:center;padding:7px 2px 7px 2px;border:1px solid black;background:-moz-linear-gradient(top, #c7c7c7,#f0edf7);background:-webkit-linear-gradient(top, #c7c7c7,#f0edf7);color:black;font:bold 13pt Arial,Sans-Serif;}tr.judul {background:#bebdc2;font-size:12pt;}input.ak_cetak{	border:none;	background:transparent;  	font-size:11pt;	color:black; 	font-family:calibri,Times New Roman,verdana;}.ak{	width:65px;	text-align:right; }.f{	width:20px;	text-align:right; }
+/*  ======================= TABLE FORM ATRIBUT  ===================================== *//*  =========================== ============== ====================================== */table.keterangan_perorangan {	margin:auto;	border-collapse:none;	border:none;	color:black;	font:normal 13pt Arial,Sans-Serif,Times New Roman,verdana !important;	width:1000px;}table.keterangan_perorangan td{	border-collapse:collapse;	padding:3px 5px 4px 10px;	vertical-align:center;}/*  ======================= TABLE CETAK ATRIBUT  ===================================== *//*  =========================== ============== ====================================== */table.cetak_pak {	width:1100px;	margin:auto;	border-collapse:collapse;	border:1px solid black;	color:black;	}table.cetak_pak td {line-height:42pt;}table.kop_pak {	width:1100px;	margin:auto;	border-collapse:collapse;	color:black;}table.tg_cetak_pak {	width:1100px;	margin:auto;		color:black;	}hr.kop_hr_pak{	margin-top:-45px;	border:2px solid black;}table.cetak_pak td{		font:normal 12pt Verdana,Arial,Sans-Serif;		padding:5px 6px 5px 6px;		vertical-align:center;		border:1px solid black;		color:black;}table.kop_pak td{		font:normal 12pt Sans-Serif;		Line-height:18pt;	}table.cetak_pak th{		vertical-align:center;		padding:5px 0px 5px 0px;		border:1px solid black;		color:black;		font-weight:normal;		font-size:12pt;}th.tengah{		vertical-align:center;		padding:5px 0px 5px 0px;				color:black;		font-weight:bold;		font-size:13px;}table.cetak_pak td.tengah {	vertical-align:center;	text-align: right;	}table.cetak_pak td.nilai{	text-align:right;	font-weight:bold;	padding-right:10px;}
+table.rincian {	border:0px ;	}table.rincian td {	border:0px ;	padding:6px 0 0 0;	font:normal 11pt Sans-Serif;		}
