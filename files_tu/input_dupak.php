@@ -76,7 +76,7 @@ $("#input_dupak").click(function(){
 						
 						**/
 						if ( data[0] == 0 || data[0] == 1){
-							window.location.assign("?page=form_dupak&id_pegawai="+id_pegawai);
+							window.location.assign("?page=new_dupak&id_pegawai="+id_pegawai);
 						}else if ( data[0] == 2 ){
 							proses_penilai(data[1]);	
 						}else if ( data[0] == 3 ){
