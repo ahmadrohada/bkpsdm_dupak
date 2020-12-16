@@ -436,7 +436,7 @@ if( (isset($_POST['cari'])) | (isset($_GET['cari']))){
 		<a href="?page=form_dupak&id_dupak=<?php echo $r->id; ?>" class="aksi" >LANJUT</a>
 		
 		<?php } else if ($r->step == 6 ){ ?>
-		<a href="?page=form_dupak&id_pegawai=<?php echo $r->id_pegawai; ?>" class="aksi" >&nbsp;LIHAT&nbsp;</a>
+		<a href="?page=form_dupak&id_dupak=<?php echo $r->id; ?>" class="aksi" >&nbsp;LIHAT&nbsp;</a>
 		<?php } else  { ?>
 			
 		<a href="#" class="aksi lihat" value="<?php echo $r->id_dupak; ?>" > &nbsp;LIHAT&nbsp;</a>	
