@@ -1,4 +1,13 @@
 <?php
+
+$conn = array(
+	'user' => 'root',
+	'pass' => '',
+	'db'   => 'pak_baru',
+	'host' => 'localhost' 
+);
+
+
 class Connect {
 	protected static $_connection;
 	public static function getConnection(){

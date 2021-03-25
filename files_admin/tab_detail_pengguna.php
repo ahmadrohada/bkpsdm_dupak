@@ -868,13 +868,24 @@ $data_4 = mysql_fetch_object(mysql_query(" SELECT * FROM dt_dupak_pengguna WHERE
 		//nama kepsek
 		$kepsek = mysql_fetch_object(mysql_query("SELECT nama,nip_baru,gelar_dpn,gelar_blk FROM dt_pegawai WHERE id_pegawai='$data_sekolah->id_kepsek' "));
 		//nama kepsek
-		if ($kepsek->gelar_blk == null ) 
-		{ $koma = ""; } else { $koma = ", ";};
-		if ($kepsek->gelar_dpn == null ) 
-		{ $titik = ""; } else { $titik = ". ";};
+		if ($kepsek){
+			if ( $kepsek->gelar_blk == null ) 
+			{ $koma = ""; } else { $koma = ", ";};
+			if ($kepsek->gelar_dpn == null ) 
+			{ $titik = ""; } else { $titik = ". ";};
+
+			$nama_kepsek 	= $kepsek->gelar_dpn.$titik.ucwords(strtolower($kepsek->nama)).$koma.$kepsek->gelar_blk;
+			$nip_kepsek		= $kepsek->nip_baru;
+
+		}else{
+			$nama_kepsek 	= "-";
+			$nip_kepsek		= "-";
+
+		}
+		
 	
-		$nama_kepsek 	= $kepsek->gelar_dpn.$titik.ucwords(strtolower($kepsek->nama)).$koma.$kepsek->gelar_blk;
-		$nip_kepsek		= $kepsek->nip_baru;
+		
+
 		$no_tlp_sekolah = $data_sekolah->no_tlp_sekolah;
 		$alamat_sekolah	= $data_sekolah->alamat_sekolah;
 	}else{

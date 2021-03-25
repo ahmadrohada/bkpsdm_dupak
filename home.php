@@ -24,12 +24,16 @@ include_once dirname(__FILE__).DIRECTORY_SEPARATOR.'kelas/pustaka.php';
 <link rel="stylesheet" href="./css/menu.css"  />
 
 
+
+
+
 <link rel="stylesheet" href="./css/ui-lightness/jquery-ui-1.10.3.custom.css" >
 <!--  jquery core -->
 <!-- Core Scripts - Include with every page -->
     <script src="js/jquery-1.9.1.js"></script>
 <!--  ui -->
 	<script src="js/jquery-ui-1.10.3.custom.js"></script>
+   
 	
 <!-- Custom jquery scripts -->
 <script src="./js/custom_ajax.js"></script>
