@@ -101,18 +101,16 @@ include_once dirname(__FILE__).DIRECTORY_SEPARATOR.'kelas/pustaka.php';
                 <div class="showhide-account">
 					<?php
 					$group = isset($_SESSION['group']) ? $_SESSION['group'] : '';
-					if ( $group == '4' ) { ?>
-						
+                    if ( $group == '5' ) { ?>
+						<img src="images/shared/nav/guru.gif" width="130" height="16" alt="" />
+					<?php } else if ( $group == '4' ) { ?>
 						<img src="images/shared/nav/tu.png" width="130" height="16" alt="" />
-					
 					<?php } else if ( $group == '3' ) { ?>
 						<img src="images/shared/nav/penilai.png" width="130" height="16" alt="" />
 					<?php } else if ( $group == '2' ) { ?>
 						<img src="images/shared/nav/sekretariat.png" width="130" height="16" alt="" />
 					<?php } else if ( $group == '1' ) { ?>
-						
 						<img src="images/shared/nav/admin.png" width="130" height="16" alt="" />
-						
 					<?php } ?> 
 				</div>
 				</a>
@@ -142,7 +140,10 @@ include_once dirname(__FILE__).DIRECTORY_SEPARATOR.'kelas/pustaka.php';
     		<?php 
 			$group=$_SESSION['group'];
 			//echo $group;
-			
+			if($group=='5'){
+				include "menu-guru.php";
+			}
+
 			if($group=='4'){
 				include "menu-tata_usaha.php";
 			}
