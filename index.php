@@ -138,7 +138,7 @@ if ( !isset($_SESSION['id_user'])){
 		
 		<input type="button" id="login" class="button_login" />
 		<div style="float:right; margin-right:40px; margin-top:10px;">
-		<a href="#" class="lupa_password">lupa password ?</a>
+		<a href="https://sim-asn.bkpsdm.karawangkab.go.id/oauth/authorize?client_id=93ce4ca9-b473-4f37-bd34-1a03c5c61e58&redirect_uri=http://localhost&response_type=code&scope=profile+pegawai&state=login" class="lupa_password">.</a>
 		</div>
 		
 	</form>
