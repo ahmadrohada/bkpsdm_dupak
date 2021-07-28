@@ -759,7 +759,7 @@ $no_dupak 		= isset($_GET['no_dupak']) ? $_GET['no_dupak'] : '';
 </tr>
 <tr>
 	<td align="center" height="38px" valign="bottom">
-		<input type="text" style=" text-align:center; width:920px; border:none; background:transparent; font-size:19pt; color:black; font-weight:bold; font-family:Times New Roman,verdana,calibri; letter-spacing:2pt;" id="sekolah">
+		<input type="text" style=" text-align:center; width:920px; border:none; background:transparent; font-size:14pt; color:black; font-weight:bold; font-family:Times New Roman,verdana,calibri; letter-spacing:2pt;" id="sekolah">
 	</td>
 </tr>
 <tr>

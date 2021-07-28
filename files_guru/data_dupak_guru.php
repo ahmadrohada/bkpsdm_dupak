@@ -220,20 +220,10 @@ $(document).ready(function () {
 
 
 <h3 class="page-header">
-DATA DUPAK
+DATA DUPAK PERSONAL
 </h3>
 
-<table  width="100%">
-<tr>
-	<td align="right">
-		<form action="" method="post">
-		Cari dengan No DUPAK, Nip Baru  atau Nama Pegawai &nbsp;&nbsp;&nbsp;<input  type="text" name="txtcari"  size="33" maxlength="34"> 
-		<input type="submit" name="cari" value="Cari">
-		</form>
-	</td>
-</tr>
-</table>
-<br>
+
 <table border="1" class="data table-hover" width="100%">
 <thead>
         <tr>
@@ -248,7 +238,7 @@ DATA DUPAK
 </thead>
 <tbody>	
 <?php
-$kd_skpd = isset($_SESSION['kd_skpd']) ? $_SESSION['kd_skpd'] : '';
+$id_pegawai = isset($_SESSION['id_pegawai']) ? $_SESSION['id_pegawai'] : '';
 
 if((!isset($_GET['hal'])) | (isset($_POST['cari'])))
 	{
@@ -281,16 +271,16 @@ if( (isset($_POST['cari'])) | (isset($_GET['cari']))){
 		$txtcari=$_GET['cari'];
 		
 		//pencarian data
-		$page['jika'] = "dt_pegawai.id_pegawai = dt_dupak.id_pegawai and (dt_pegawai.nip_baru = '$txtcari' or nama LIKE '%$txtcari%' or dt_dupak.no_dupak = '$txtcari') and dt_dupak.kd_skpd='$kd_skpd'";
-		$all['jika'] = "dt_pegawai.id_pegawai = dt_dupak.id_pegawai and (dt_pegawai.nip_baru = '$txtcari' or nama LIKE '%$txtcari%' or dt_dupak.no_dupak = '$txtcari') and dt_dupak.kd_skpd='$kd_skpd' ";
+		$page['jika'] = "dt_pegawai.id_pegawai = dt_dupak.id_pegawai and (dt_pegawai.nip_baru = '$txtcari' or nama LIKE '%$txtcari%' or dt_dupak.no_dupak = '$txtcari') and dt_dupak.id_pegawai='$id_pegawai'";
+		$all['jika'] = "dt_pegawai.id_pegawai = dt_dupak.id_pegawai and (dt_pegawai.nip_baru = '$txtcari' or nama LIKE '%$txtcari%' or dt_dupak.no_dupak = '$txtcari') and dt_dupak.id_pegawai='$id_pegawai' ";
 		
 		$_SESSION['cari']= $txtcari; //menyiapkan GET cari untuk pagination
 		$_SESSION['nama_file']= $nama_file;
 		
 } else {
 		//defaul data	
-		$page['jika'] = "dt_pegawai.id_pegawai = dt_dupak.id_pegawai and dt_dupak.kd_skpd='$kd_skpd'";
-		$all['jika'] = "dt_pegawai.id_pegawai = dt_dupak.id_pegawai and dt_dupak.kd_skpd='$kd_skpd'";
+		$page['jika'] = "dt_pegawai.id_pegawai = dt_dupak.id_pegawai and dt_dupak.id_pegawai='$id_pegawai'";
+		$all['jika'] = "dt_pegawai.id_pegawai = dt_dupak.id_pegawai and dt_dupak.id_pegawai='$id_pegawai'";
 }
 
 	include_once dirname(__FILE__).DIRECTORY_SEPARATOR.'../kelas/pustaka.php';

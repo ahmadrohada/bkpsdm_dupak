@@ -826,9 +826,10 @@ if($op=='ralat_guru'){
 	$nip_baru		= $_GET['nip_baru'];
 	Connect::getConnection();
 	
-	$cek_nip = mysql_num_rows(mysql_query("SELECT id FROM dt_dupak_pengguna WHERE nip_pengguna='$nip_baru' "));
+	//saya juga bingug knapa ada queery ini, ubah 28072021
+	//$cek_nip = mysql_num_rows(mysql_query("SELECT id FROM dt_dupak_pengguna WHERE nip_pengguna='$nip_baru' "));
 	
-	if ($cek_nip == 0){
+	//if ($cek_nip == 0){
 	$query = mysql_query("SELECT * FROM dt_pegawai WHERE nip_baru='$nip_baru' ");
 	
 	if (mysql_num_rows($query) != 0 ){
@@ -858,9 +859,9 @@ if($op=='ralat_guru'){
 	}else{
 		echo "0"; //jika nip tidak ada pada dt pegawai
 	}
-	}else{
-		echo "2";  //jika nip sudah diregistrasi
-	}
+	//}else{
+	//	echo "2";  //jika nip sudah diregistrasi
+	//}
 		
 }else if($op=='simpan_pengguna'){
 	Connect::getConnection();

@@ -402,7 +402,7 @@ $(function(){
 
 
 <h3 class="page-header">
-My Account ( Operator Sekolah )
+My Account ( Guru )
 </h3>
 <table style="width:932px; margin-left:0px;" border="0" class="data_form">
 
@@ -496,13 +496,6 @@ My Account ( Operator Sekolah )
 </tr>
 
 
-<tr>
-	<td colspan="3" align="right" style="padding:10px 0px 0 0; ">
-		<button class="ui-state-default ralat"  id="ubah_data_sekolah" >UBAH DATA SEKOLAH</button>
-		<button class="ui-state-default simpan"  id="simpan_data_sekolah" >SIMPAN</button>
-		<button class="ui-state-default batal"  id="batal" >BATAL</button>
-	</td>
-</tr>
 
 </table>	
 
