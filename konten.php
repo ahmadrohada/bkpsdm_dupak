@@ -5,7 +5,7 @@
 Connect::getConnection();
 $id_user = $_SESSION['id_user'];
 
-
+//tes
 
 $sql=mysql_fetch_object(mysql_query("SELECT status FROM dt_dupak_pengguna where id='$id_user' "));
 $_SESSION['status_user'] 	= $sql->status;
