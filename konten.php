@@ -54,16 +54,15 @@ if (( $status_web == 0 ) && ( $group!='1') ){   //disabled kecuali admin
 	
 if(isset($_GET['page'])){
 
-	if($group=='4'){
-		
+	if($group=='5'){
+		$page="files_guru/".$_GET['page'];	
+	} else if($group=='4'){
 		//Buat pengecualian untuk yang belum set sekolah
-		
 		if ( $_SESSION['status_sekolah'] == '0' ){
 			$page="files_tu/setting";	
 		}else{
 			$page="files_tu/".$_GET['page'];	
 		}
-		
 	} else if($group=='2'){
 		$page="files_sekretariat/".$_GET['page'];	
 	} else if($group=='3'){

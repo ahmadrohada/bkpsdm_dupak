@@ -1695,6 +1695,7 @@ if($op=='detail_data_guru'){
 	$data = mysql_fetch_object(mysql_query("SELECT * FROM dt_dupak_pengguna WHERE id= '$id' "));
 	$nama_user = $data->nama_pengguna;
 	
+	if ($data->group == '5' ) 	$group = 'Guru';
 	if ($data->group == '4' ) 	$group = 'Operator Sekolah';
 	if ($data->group == '2' ) 	$group = 'Sekretariat';
 	if ($data->group == '3' ) 	$group = 'Tim Penilai';
