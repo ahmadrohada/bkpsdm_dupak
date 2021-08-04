@@ -1059,9 +1059,11 @@ if($op=='ralat_guru'){
 	$pilihan	= $_GET['pilihan'];
 	$usulan		= $_GET['usulan'];
 	$id_user	= $_GET['id_user'];
+	date_default_timezone_set('Asia/Jakarta');
+	$waktu = date('Y'."-".'m'."-".'d'." ".'H'.":".'i'.":".'s');
 	
 	Connect::getConnection();
-	$insert=mysql_query("INSERT INTO dt_polling values('','$id_user','$pilihan','$usulan','')") or die( mysql_error());
+	$insert=mysql_query("INSERT INTO dt_polling values('','$id_user','$pilihan','$usulan','$waktu')") or die( mysql_error());
 	
 	echo $insert;
 }else if($op=='set_online'){
