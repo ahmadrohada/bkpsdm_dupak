@@ -1061,7 +1061,7 @@ if($op=='ralat_guru'){
 	$id_user	= $_GET['id_user'];
 	
 	Connect::getConnection();
-	$insert=mysql_query("INSERT INTO dt_polling values('','$id_user','$pilihan','$usulan')") or die( mysql_error());
+	$insert=mysql_query("INSERT INTO dt_polling values('','$id_user','$pilihan','$usulan','')") or die( mysql_error());
 	
 	echo $insert;
 }else if($op=='set_online'){
