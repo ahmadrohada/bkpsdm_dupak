@@ -1,1 +1,197 @@
-<script>$(document).ready(function () {});</script><!--=====================================================- > **********************************************************                   TAMPIL DATA DUPAK**********************************************************<--====================================================----><h3 class="page-header">DATA DUPAK</h3><table  width="100%"><tr>	<td align="right">		<form action="" method="post">		Cari dengan No DUPAK, Nip Baru  atau Nama Pegawai &nbsp;&nbsp;&nbsp;<input  type="text" name="txtcari"  size="33" maxlength="34"> 		<input type="submit" name="cari" value="Cari">		</form>	</td></tr></table><br><table border="1" class="data table-hover" width="100%"><thead>        <tr>			<th width="4%">No</th>			<th width="14%">NO DUPAK</th>			<th width="13%">NIP BARU</th>			<th>NAMA GURU</th>			<th>PENILAI 1</th>			<th>PENILAI 2</th>			<th>AKSI</th>        </tr>    </thead><tbody>	<?php$_POST['cari'] = isset($_POST['cari']) ? $_POST['cari'] : '';$_GET['cari'] = isset($_GET['cari']) ? $_GET['cari'] : '';if((!isset($_GET['hal'])) | (isset($_POST['cari'])))	{		$nohal = 1;	} 	else 		$nohal = $_GET['hal'];$nama_file = "data_dupak";		$dataperhal = 20;$offset = ($nohal - 1) * $dataperhal; //no record awal yang akan ditampilkan$page= array(); //menampilkan data dengan pagination$all= array(); //menampilkan data tanpa pagination$page['limit'] = $offset.",".$dataperhal;$page['field'] = "distinct dt_dupak.nip_baru, dt_pegawai.nama,dt_dupak.no_dupak,dt_dupak.step,dt_dupak.status_dupak,dt_dupak.penilai_1,dt_dupak.penilai_2";$all['field'] = "distinct dt_dupak.nip_baru,dt_pegawai.nama,dt_dupak.no_dupak,dt_dupak.step,dt_dupak.status_dupak,dt_dupak.penilai_1,dt_dupak.penilai_2";//PENCARIAN DATAif( (isset($_POST['cari'])) | (isset($_GET['cari']))){		if($_POST['cari']!=null){			$txtcari=$_POST['txtcari'];		}else			$txtcari=$_GET['cari'];		//pencarian data		$page['jika'] = "dt_pegawai.nip_baru = dt_dupak.nip_baru and (dt_pegawai.nip_baru = '$txtcari' or nama LIKE '%$txtcari%' or dt_dupak.no_dupak = '$txtcari') and dt_dupak.step = '20' ";		$all['jika'] = "dt_pegawai.nip_baru = dt_dupak.nip_baru and (dt_pegawai.nip_baru = '$txtcari' or nama LIKE '%$txtcari%' or dt_dupak.no_dupak = '$txtcari') and dt_dupak.step = '20' ";		$_SESSION['cari']="&cari=".$txtcari; //menyiapkan GET cari untuk pagination		$_SESSION['nama_file']= $nama_file;} else {		//defaul data			$page['jika'] = "dt_pegawai.nip_baru = dt_dupak.nip_baru and dt_dupak.step = '20' ";		$all['jika'] = "dt_pegawai.nip_baru = dt_dupak.nip_baru and dt_dupak.step = '20'";}	include_once dirname(__FILE__).DIRECTORY_SEPARATOR.'../kelas/pustaka.php';	$dataPak	= 	New KelolaDataDupak();	$hasil 		= 	$dataPak->TampilDataDupak("dt_dupak,dt_pegawai",$page);	//mencari jumlah data yang harus ditampilkan perhalaman	$hasil2= $dataPak->TampilDataDupak("dt_dupak,dt_pegawai",$all);	$jumdata=0;	foreach($hasil2 as $j){ $jumdata=$jumdata+1; }	$jumhal = ceil($jumdata/$dataperhal);	//penomoran data	$no=1 + ($nohal*$dataperhal) -$dataperhal;	foreach($hasil as $r)	{		//pencarian gelar pada data PAK	$x = mysql_query("SELECT no_pak FROM dt_pak WHERE nip_baru='$r->nip_baru' ORDER BY tgl_pak ASC");	$data = mysql_num_rows($x);	//jika ditemukan data lebih dari 1	if ( $data > 1 ) {		while ($c = mysql_fetch_array($x)){					$dpt = $c['no_pak'];			}					$pak_terakhir = mysql_fetch_object(mysql_query("SELECT * FROM dt_pak WHERE no_pak='$dpt' "));			} else {					$pak_terakhir = mysql_fetch_object(mysql_query("SELECT * FROM dt_pak WHERE nip_baru='$r->nip_baru' ORDER BY tgl_pak DESC"));			}		$pak_terakhir = isset($pak_terakhir->no_pak) ? $pak_terakhir->no_pak : '';		$glr		=   mysql_fetch_object(mysql_query("SELECT gelar_dpn,gelar_blk FROM tb_pak_guru_pend WHERE no_pak='$pak_terakhir' "));	$d 			= 	New FormatTanggal();	?><tr>	<td align="center">		<?php echo $no; ?>	</td>	<td width="20%"  align="center">		<?php echo $r->no_dupak; ?>	</td>	<td align="center">	<?php echo $r->nip_baru; ?>	</td>	<td align="" >	<?php 		$g_blk = isset($glr->gelar_blk) ? $glr->gelar_blk : '';		if ($g_blk == null ) 		{ $koma = ""; } else { $koma = ", ";};		$g_dpn = isset($glr->gelar_dpn) ? $glr->gelar_dpn : '';		if ($g_dpn == null ) 		{ $titik = ""; } else { $titik = ". ";};		echo  $g_dpn.$titik.ucwords(strtolower($r->nama)).$koma.$g_blk;	?>	</td>	<td>		<?php			echo $r->penilai_1;		?>	</td>	<td>		<?php			echo $r->penilai_2;		?>	</td>	<td align="center">		<a href="?page=detail_dupak&no_dupak=<?php echo $r->no_dupak; ?>&nip_baru=<?php echo $r->nip_baru; ?>" class="aksi" >Lihat Data</a>	</td></tr><?php$no = $no+1;}?><tr>	<td colspan="5" align="center" bgcolor="#FFFFFF">		</td></tr></tbody></table><?phpinclude ("kelas/pagination.php");?>
+<script>
+$(document).ready(function () {
+
+
+});
+</script>
+
+<!--=====================================================- > 
+**********************************************************
+                   TAMPIL DATA DUPAK
+**********************************************************
+<--====================================================---->
+
+
+<h3 class="page-header">
+DATA DUPAK
+</h3>
+
+<table  width="100%">
+<tr>
+	<td align="right">
+		<form action="" method="post">
+		Cari dengan No DUPAK, Nip Baru  atau Nama Pegawai &nbsp;&nbsp;&nbsp;<input  type="text" name="txtcari"  size="33" maxlength="34"> 
+		<input type="submit" name="cari" value="Cari">
+		</form>
+	</td>
+</tr>
+</table>
+<br>
+<table border="1" class="data table-hover" width="100%">
+<thead>
+        <tr>
+			<th width="4%">No</th>
+			<th width="12%">NO DUPAK</th>
+			<th width="13%">NIP BARU</th>
+			<th>NAMA PEGAWAI</th>
+			<th width="17%">PENILAI 1</th>
+			<th width="17%">PENILAI 2</th>
+			<th width="10%">AKSI</th>
+        </tr>    
+</thead>
+<tbody>	
+<?php
+$penilai = isset($_SESSION['id_pegawai']) ? $_SESSION['id_pegawai'] : '';
+
+if((!isset($_GET['hal'])) | (isset($_POST['cari'])))
+	{
+		$nohal = 1;
+	} 
+	else 
+		$nohal = $_GET['hal'];
+
+$nama_file = "data_dupak";		
+$dataperhal = 20;
+$offset = ($nohal - 1) * $dataperhal; //no record awal yang akan ditampilkan
+$page= array(); //menampilkan data dengan pagination
+$all= array(); //menampilkan data tanpa pagination
+
+
+$page['limit'] = $offset.",".$dataperhal;
+$page['urut'] = 'tgl_entry asc';
+//PENCARIAN DATA
+$_POST['cari'] = isset($_POST['cari']) ? $_POST['cari'] : '';
+$_GET['cari'] = isset($_GET['cari']) ? $_GET['cari'] : '';
+
+$page['field'] = "distinct dt_dupak.id_pegawai, dt_pegawai.nama, dt_pegawai.nip_baru,dt_dupak.no_dupak,dt_dupak.step,dt_dupak.status_dupak,dt_dupak.id_penilai_1,dt_dupak.id_penilai_2";
+$all['field'] = "distinct dt_dupak.id_pegawai,dt_pegawai.nama, dt_pegawai.nip_baru,dt_dupak.no_dupak,dt_dupak.step,dt_dupak.status_dupak,dt_dupak.id_penilai_1,dt_dupak.id_penilai_2";
+
+
+//PENCARIAN DATA
+if( (isset($_POST['cari'])) | (isset($_GET['cari']))){
+		if($_POST['cari']!=null){
+			$txtcari=$_POST['txtcari'];
+		}else
+		$txtcari=$_GET['cari'];
+		
+		//pencarian data
+		$page['jika'] = "dt_pegawai.id_pegawai = dt_dupak.id_pegawai and (dt_pegawai.nip_baru = '$txtcari' or nama LIKE '%$txtcari%' or dt_dupak.no_dupak = '$txtcari') and  step = 20 ";
+		$all['jika'] = "dt_pegawai.id_pegawai = dt_dupak.id_pegawai and (dt_pegawai.nip_baru = '$txtcari' or nama LIKE '%$txtcari%' or dt_dupak.no_dupak = '$txtcari') and  step = 20 ";
+		
+		$_SESSION['cari']= $txtcari; //menyiapkan GET cari untuk pagination
+		$_SESSION['nama_file']= $nama_file;
+		
+} else {
+		//defaul data	
+		//$page['jika'] = "dt_pegawai.id_pegawai = dt_dupak.id_pegawai and ( (dt_dupak.step='7') or ((dt_dupak.step='13') and ( ((dt_dupak.id_penilai_1 != '$penilai') and (dt_dupak.id_penilai_2 != '$penilai')) )))";
+		$page['jika'] = "dt_pegawai.id_pegawai = dt_dupak.id_pegawai and step = 20 ";
+		$all['jika'] = "dt_pegawai.id_pegawai = dt_dupak.id_pegawai and step = 20  ";
+}
+
+	include_once dirname(__FILE__).DIRECTORY_SEPARATOR.'../kelas/pustaka.php';
+	$dataPak	= 	New KelolaDataDupak();
+	$hasil 		= 	$dataPak->TampilDataDupak("dt_dupak,dt_pegawai",$page);
+
+	//mencari jumlah data yang harus ditampilkan perhalaman
+	$hasil2= $dataPak->TampilDataDupak("dt_dupak,dt_pegawai",$all);
+	$jumdata=0;
+	foreach($hasil2 as $j){ $jumdata=$jumdata+1; }
+	$jumhal = ceil($jumdata/$dataperhal);
+	//penomoran data
+	$no=1 + ($nohal*$dataperhal) -$dataperhal;
+
+
+
+	foreach($hasil as $r)
+	{
+	
+	//pencarian gelar pada data PAK
+	$x = mysql_query("SELECT no_pak FROM dt_pak WHERE nip_baru='$r->nip_baru' ORDER BY tgl_pak ASC");
+	$data = mysql_num_rows($x);
+	//jika ditemukan data lebih dari 1
+	if ( $data > 1 ) {
+		while ($c = mysql_fetch_array($x)){
+					$dpt = $c['no_pak'];
+			}
+					$pak_terakhir = mysql_fetch_object(mysql_query("SELECT * FROM dt_pak WHERE no_pak='$dpt' "));
+			} else {
+					$pak_terakhir = mysql_fetch_object(mysql_query("SELECT * FROM dt_pak WHERE nip_baru='$r->nip_baru' ORDER BY tgl_pak DESC"));
+			}
+	
+	$pak_terakhir = isset($pak_terakhir->no_pak) ? $pak_terakhir->no_pak : '';
+	
+	$glr		=   mysql_fetch_object(mysql_query("SELECT gelar_dpn,gelar_blk FROM tb_pak_guru_pend WHERE no_pak='$pak_terakhir' "));
+	$d 			= 	New FormatTanggal();	
+	
+	//penilai
+	if ( $r->id_penilai_1 != '' ){
+		$z = mysql_fetch_object(mysql_query("SELECT nama,gelar_dpn,gelar_blk,nip_baru FROM dt_pegawai WHERE id_pegawai='$r->id_penilai_1' "));
+		if ($z->gelar_blk == null ) 
+		{ $koma = ""; } else { $koma = ", ";};
+		if ($z->gelar_dpn == null ) 
+		{ $titik = ""; } else { $titik = ". ";};
+		$nama_penilai_1 	= $z->gelar_dpn.$titik.ucwords(strtolower($z->nama)).$koma.$z->gelar_blk;
+		
+	}else{
+		$nama_penilai_1 = '';
+	}
+	
+	if ( $r->id_penilai_2 != '' ){
+		$z = mysql_fetch_object(mysql_query("SELECT nama,gelar_dpn,gelar_blk,nip_baru FROM dt_pegawai WHERE id_pegawai='$r->id_penilai_2' "));
+		if ($z->gelar_blk == null ) 
+		{ $koma = ""; } else { $koma = ", ";};
+		if ($z->gelar_dpn == null ) 
+		{ $titik = ""; } else { $titik = ". ";};
+		$nama_penilai_2 	= $z->gelar_dpn.$titik.ucwords(strtolower($z->nama)).$koma.$z->gelar_blk;
+		
+	}else{
+		$nama_penilai_2 = '';
+	}
+	
+	
+?>
+<tr>
+	<td align="center">
+		<?php echo $no; ?>
+	</td>
+	<td width="20%"  align="center">
+		<?php echo $r->no_dupak; ?>
+	</td>
+	<td align="center">
+	<?php echo $r->nip_baru; ?>
+	</td>
+	<td align="" >
+	<?php 
+		$g_blk = isset($glr->gelar_blk) ? $glr->gelar_blk : '';
+		if ($g_blk == null ) 
+		{ $koma = ""; } else { $koma = ", ";};
+		$g_dpn = isset($glr->gelar_dpn) ? $glr->gelar_dpn : '';
+		if ($g_dpn == null ) 
+		{ $titik = ""; } else { $titik = ". ";};
+		echo  $g_dpn.$titik.ucwords(strtolower($r->nama)).$koma.$g_blk;
+	?>
+	</td>
+	<td align="" >
+	<?php 
+		echo  $nama_penilai_1;
+	?>
+	</td>
+	<td align="" >
+	<?php 
+		echo  $nama_penilai_2;
+	?>
+	</td>
+	<td align="center">
+		<a href="?page=detail_dupak&no_dupak=<?php echo $r->no_dupak; ?>&nip_baru=<?php echo $r->nip_baru; ?>" class="aksi" >Lihat Data</a>
+	</td>
+</tr>
+<?php
+$no = $no+1;
+}
+?>
+</tbody>
+</table>
+
+<?php
+include ("kelas/pagination.php"); 
+?>

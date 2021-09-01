@@ -1,99 +1,17 @@
-
-
 <script>
 $(document).ready(function () {
-	
-	
-	$(".verifikasi").click(function(){
-		var no_dupak = $(this).attr('value'); //
-		
-		$.ajax({
-			url:"./kelas/verifikasi.php",
-			data:"op=cek_penilai&no_dupak="+no_dupak,
-            cache:false,
-            success:function(msg){
-				/** HASIL CEK
-				// P1 // P2 // progress P1 // Progress P2 // id skarang
-				**/
-					//alert(msg);
-					//blm dinilai
-					if (msg=='00000') {
-						//verifikasi dupak dari nol
-						window.location.assign("?page=verifikasi_dupak&no_dupak="+no_dupak+"&p=1");
-					}
-					if ( msg=='10000' ){
-						alert_1();
-					}
-					if ( msg=='10001' ){
-						window.location.assign("?page=verifikasi_dupak&no_dupak="+no_dupak+"&p=1");
-					}
-					if ( msg=='10100' ){
-						//alert_1();
-						window.location.assign("?page=verifikasi_dupak&no_dupak="+no_dupak+"&p=2");
-					}
-					if ( msg=='10101' ){
-						window.location.assign("?page=verifikasi_dupak&no_dupak="+no_dupak+"&p=1");
-					}
-					if ( msg=='10102' ){
-						window.location.assign("?page=verifikasi_dupak&no_dupak="+no_dupak+"&p=2");
-					}
-					if ( msg=='11101' ){
-						window.location.assign("?page=verifikasi_dupak&no_dupak="+no_dupak+"&p=1");
-					}
-					if ( msg=='11102' ){
-						window.location.assign("?page=verifikasi_dupak&no_dupak="+no_dupak+"&p=2");
-					}
-					if ( msg=='11110' ){
-						alert_1();
-					}	
-					if ( msg=='11111' ){
-						window.location.assign("?page=detail_dupak&no_dupak="+no_dupak);
-					}
-					if ( msg=='11112' ){
-						window.location.assign("?page=detail_dupak&no_dupak="+no_dupak);
-					}
-			}
-		})
-		
-		
-		
-    });
-	
-			
-	function alert_1(){
-			$("#alert").html(
-				"<center><span class='ui-icon ui-icon-alert' style='float:left; margin:0 0 10px 5px;'></span>"
-				+"DUPAK sedang dalam proses Tim Penilai yang lain</center>"
-			);
-			
-			$("#alert").dialog({show:"clip",hide:"clip",draggable:false,resizable: false,modal: true,dialogClass: 'no-close',title  : 'SIPULPENPAKGURU',
-				height: 150,
-				width: 450,
-				buttons: {
-					"Tutup": function () {
-					$(this).dialog('close');
-					$("#d_hasil_pkg").focus();
-					}
-				}
-			});
-		
-		
-	}
-		
+
 
 });
 </script>
-
 
 <!--=====================================================- > 
 **********************************************************
                    TAMPIL DATA DUPAK
 **********************************************************
 <--====================================================---->
-
-
 <h3 class="page-header">
-DATA DUPAK ( PROSES TIM PENILAI )
+DATA DUPAK
 </h3>
 
 <table  width="100%">
@@ -111,26 +29,29 @@ DATA DUPAK ( PROSES TIM PENILAI )
 <thead>
         <tr>
 			<th width="4%">No</th>
-			<th width="12%">NO DUPAK</th>
+			<th width="14%">NO DUPAK</th>
 			<th width="13%">NIP BARU</th>
-			<th>NAMA PEGAWAI</th>
-			<th width="17%">PENILAI 1</th>
-			<th width="17%">PENILAI 2</th>
-			<th width="10%">AKSI</th>
+			<th>NAMA GURU</th>
+			<th>PENILAI 1</th>
+			<th>PENILAI 2</th>
+			<th>AKSI</th>
         </tr>    
 </thead>
 <tbody>	
 <?php
-$penilai = isset($_SESSION['id_pegawai']) ? $_SESSION['id_pegawai'] : '';
+
+$_POST['cari'] = isset($_POST['cari']) ? $_POST['cari'] : '';
+$_GET['cari'] = isset($_GET['cari']) ? $_GET['cari'] : '';
 
 if((!isset($_GET['hal'])) | (isset($_POST['cari'])))
 	{
 		$nohal = 1;
-	} 
-	else 
+	} else {
 		$nohal = $_GET['hal'];
+	}
+		
 
-$nama_file = "data_pengajuan_dupak";		
+$nama_file = "data_dupak";		
 $dataperhal = 20;
 $offset = ($nohal - 1) * $dataperhal; //no record awal yang akan ditampilkan
 $page= array(); //menampilkan data dengan pagination
@@ -149,23 +70,21 @@ $all['field'] = "distinct dt_dupak.id_pegawai,dt_pegawai.nama, dt_pegawai.nip_ba
 
 //PENCARIAN DATA
 if( (isset($_POST['cari'])) | (isset($_GET['cari']))){
-		if($_POST['cari']!=null){
-			$txtcari=$_POST['txtcari'];
-		}else
-		$txtcari=$_GET['cari'];
-		
-		//pencarian data
-		$page['jika'] = "dt_pegawai.id_pegawai = dt_dupak.id_pegawai and (dt_pegawai.nip_baru = '$txtcari' or nama LIKE '%$txtcari%' or dt_dupak.no_dupak = '$txtcari') and status_dupak='level_2' and step <= 19 ";
-		$all['jika'] = "dt_pegawai.id_pegawai = dt_dupak.id_pegawai and (dt_pegawai.nip_baru = '$txtcari' or nama LIKE '%$txtcari%' or dt_dupak.no_dupak = '$txtcari') and status_dupak='level_2' and step <= 19 ";
-		
-		$_SESSION['cari']= $txtcari; //menyiapkan GET cari untuk pagination
-		$_SESSION['nama_file']= $nama_file;
-		
+	if($_POST['cari']!=null){
+		$txtcari=$_POST['txtcari'];
+	}else
+	$txtcari=$_GET['cari'];
+	
+	//pencarian data
+	$page['jika'] = "dt_pegawai.id_pegawai = dt_dupak.id_pegawai and (dt_pegawai.nip_baru = '$txtcari' or nama LIKE '%$txtcari%' or dt_dupak.no_dupak = '$txtcari')  and step = 20 ";
+	$all['jika'] = "dt_pegawai.id_pegawai = dt_dupak.id_pegawai and (dt_pegawai.nip_baru = '$txtcari' or nama LIKE '%$txtcari%' or dt_dupak.no_dupak = '$txtcari')  and step = 20 ";
+	
+	$_SESSION['cari']= $txtcari; //menyiapkan GET cari untuk pagination
+	$_SESSION['nama_file']= $nama_file;
 } else {
 		//defaul data	
-		//$page['jika'] = "dt_pegawai.id_pegawai = dt_dupak.id_pegawai and ( (dt_dupak.step='7') or ((dt_dupak.step='13') and ( ((dt_dupak.id_penilai_1 != '$penilai') and (dt_dupak.id_penilai_2 != '$penilai')) )))";
-		$page['jika'] = "dt_pegawai.id_pegawai = dt_dupak.id_pegawai and status_dupak='level_2' and step <= 19 ";
-		$all['jika'] = "dt_pegawai.id_pegawai = dt_dupak.id_pegawai and status_dupak='level_2' and step <= 19  ";
+		$page['jika'] = "dt_pegawai.id_pegawai = dt_dupak.id_pegawai and dt_dupak.step = '20' ";
+		$all['jika'] = "dt_pegawai.id_pegawai = dt_dupak.id_pegawai and dt_dupak.step = '20'";
 }
 
 	include_once dirname(__FILE__).DIRECTORY_SEPARATOR.'../kelas/pustaka.php';
@@ -201,7 +120,7 @@ if( (isset($_POST['cari'])) | (isset($_GET['cari']))){
 	$pak_terakhir = isset($pak_terakhir->no_pak) ? $pak_terakhir->no_pak : '';
 	
 	$glr		=   mysql_fetch_object(mysql_query("SELECT gelar_dpn,gelar_blk FROM tb_pak_guru_pend WHERE no_pak='$pak_terakhir' "));
-	$d 			= 	New FormatTanggal();	
+	$d 			= 	New FormatTanggal();
 	
 	//penilai
 	if ( $r->id_penilai_1 != '' ){
@@ -227,8 +146,7 @@ if( (isset($_POST['cari'])) | (isset($_GET['cari']))){
 	}else{
 		$nama_penilai_2 = '';
 	}
-	
-	
+
 ?>
 <tr>
 	<td align="center">
@@ -251,27 +169,34 @@ if( (isset($_POST['cari'])) | (isset($_GET['cari']))){
 		echo  $g_dpn.$titik.ucwords(strtolower($r->nama)).$koma.$g_blk;
 	?>
 	</td>
-	<td align="" >
-	<?php 
-		echo  $nama_penilai_1;
-	?>
+	<td>
+		<?php
+			echo $nama_penilai_1;
+		?>
 	</td>
-	<td align="" >
-	<?php 
-		echo  $nama_penilai_2;
-	?>
+	<td>
+		<?php
+			echo $nama_penilai_2;
+		?>
 	</td>
 	<td align="center">
-		<a href="#" class="aksi verifikasi" value="<?php echo $r->no_dupak; ?>" >LIHAT</a>
+		<a href="?page=detail_dupak&no_dupak=<?php echo $r->no_dupak; ?>&nip_baru=<?php echo $r->nip_baru; ?>" class="aksi" >Lihat Data</a>
 	</td>
 </tr>
 <?php
 $no = $no+1;
 }
 ?>
+<tr>
+	<td colspan="5" align="center" bgcolor="#FFFFFF">
+	
+	</td>
+</tr>
 </tbody>
 </table>
 
 <?php
-include ("kelas/pagination.php"); 
+include ("kelas/pagination.php");
 ?>
+
+

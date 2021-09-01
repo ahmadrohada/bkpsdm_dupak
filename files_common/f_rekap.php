@@ -106,6 +106,49 @@ $(document).ready(function () {
 					}
 			})
 	 });
+
+	 $("#kirim").click(function(){
+			$.ajax({
+			url:"./kelas/dupak.php",
+			data:"op=update_step&step=6&no_dupak="+no_dupak,
+                    cache:false,
+                    success:function(msg){
+		
+					//$( "#tab_new_dupak" ).tabs( "option", "active", 0 );
+					//window.location.assign("home.php?page=detail_dupak&no_dupak="+no_dupak);
+					window.location.assign("?page=data_dupak");
+					}
+			})
+	 });
+
+
+	 $("#simpan_kirim").click(function(){
+
+		$("#alert").html(
+							"<center><span class='ui-icon ui-icon-alert' style='float:left; margin:0 0 10px 5px;'></span>"
+							+"Pastikan kembali data yang anda masukan benar</center>"
+						);
+
+		$("#alert").dialog({show:"clip",hide:"clip",draggable:false,resizable: false,modal: true,dialogClass: 'no-close',title  : 'Kirim Pengajuan Dupak',
+							height: 170,
+							width: 450,
+							buttons: {
+								"Tutup": function () {
+								$(this).dialog('close');
+								},
+								"Kirim": function () {
+									$.ajax({
+										url:"./kelas/dupak.php",
+										data:"op=update_step_level&step=7&level=level_2&no_dupak="+no_dupak,
+												cache:false,
+												success:function(msg){
+												window.location.assign("?page=data_dupak_guru");
+												}
+										})
+								}
+							}
+						});
+	 });
 	
 	
 });
@@ -310,7 +353,8 @@ $(document).ready(function () {
 <table style="width:732px; margin-left:30px;" border="0">
 <tr>
 	<td colspan="2">
-		<button class="ui-state-default simpan" id="simpan_rekap" >SELESAI</button>
+		<!-- <button class="ui-state-default simpan" id="simpan_rekap" >SELESAI</button><br> -->
+		<button class="ui-state-default simpan" id="simpan_kirim" >KIRIM DUPAK</button>
 	</td>
 </tr>
 </table>

@@ -243,6 +243,18 @@ if($op=='simpan_dupak'){
 									step	='$step'
 									WHERE no_dupak = '$no_dupak' ");
 
+}else if($op=='update_step_level'){
+	$no_dupak		= $_GET['no_dupak'];
+	$step			= $_GET['step'];
+	$level			= $_GET['level'];
+	
+// ketersediaan data pegawai,.. 
+	Connect::getConnection();
+	$update = mysql_query("UPDATE dt_dupak SET 
+									step	='$step',
+									status_dupak   = '$level'
+									WHERE no_dupak = '$no_dupak' ");
+
 }else if($op=='add_pendidikan'){
 	
 	$kegiatan_ak	= 'ak_'.$_GET['kode_kegiatan'];
