@@ -25,9 +25,9 @@ $(document).ready(function () {
             success:function(msg){
 				data=msg.split("|");
 				//alert(msg);
-				if ( data[0] == 6 ) {
+				if ( data[0] <= 7 ) {
 					window.location.assign("?page=cetak_data_dupak&no_dupak="+no_dupak);
-				} else if ( data[0] > 6 ) {
+				} else if ( data[0] > 7 ) {
 				
 				$("#dialog-form").html(
 				"<center><span class='ui-icon ui-icon-alert' style='float:left; margin:0 0 10px 5px;'></span>"
