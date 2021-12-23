@@ -217,6 +217,9 @@ if($op=='detail_pak_baru'){
 		$p2 = mysql_fetch_object(mysql_query("SELECT * FROM tb_dupak_penilai WHERE no_dupak='$no_dupak' and keterangan='p2' "));
 
 
+	if ($ak){
+
+	
 	$ak_pend_baru	= ( $ak->ak_01 * $f->f_01 * $p1->p_01 *  $p1->p_01 )
 					+ ( $ak->ak_01_1 * $f->f_01_1 * $p1->p_01_1 *  $p2->p_01_1)
 					+ ( $ak->ak_02 * $f->f_02 * $p1->p_02 *  $p2->p_02)
@@ -312,7 +315,17 @@ if($op=='detail_pak_baru'){
 								+ ( $ak->ak_77 * $f->f_77 * $p1->p_77 *  $p2->p_77)
 								+ ( $ak->ak_78 * $f->f_78 * $p1->p_78 *  $p2->p_78)
 								+ ( $ak->ak_79 * $f->f_79 * $p1->p_79 *  $p2->p_79);
+	}else{
+		$ak_pend_baru = 0 ;
+		$ak_diklat_baru = 0 ;
+		$ak_pbt_baru = 0 ;
+		$ak_pd_baru = 0 ;
+		$ak_pi_baru = 0 ;
+		$ak_ki_baru = 0 ;
+		$ak_sttb_tdksesuai_baru = 0 ;
+		$ak_dukung_tugas_baru = 0 ;
 
+	}
 
 
 		//TOTAL AK lama + baru
