@@ -9,6 +9,16 @@ if ( $nama_file != $s_nama_file ) {
 $_SESSION['cari'] = '';
 }
 
+
+if ( isset($_GET['periode']) ){
+	$periode ='&periode='.$_GET['periode'];
+	
+}else{
+	$periode = '';
+	
+}
+
+
 if ( $_SESSION['cari'] != '' ){
 	$cari_data =$_SESSION['cari'];
 	
@@ -21,7 +31,7 @@ if ( $_SESSION['cari'] != '' ){
 
 
 
-if ($nohal > 1) echo  "<a class='pagination' href='".$_SERVER['PHP_SELF']."?page=$nama_file&hal=".($nohal-1)."".$cari_data."'>&lt;&lt; Prev</a>";
+if ($nohal > 1) echo  "<a class='pagination' href='".$_SERVER['PHP_SELF']."?page=$nama_file&hal=".($nohal-1)."".$periode."".$cari_data."'>&lt;&lt; Prev</a>";
 
 
 
@@ -52,7 +62,7 @@ for($hal = 1; $hal <= $jumhal; $hal++)
             if ($hal == $nohal) echo " <b class='disabled'>".$hal."</b> ";
 
 
-            else echo " <a class='pagination' href='".$_SERVER['PHP_SELF']."?page=$nama_file&hal=".$hal."".$cari_data."'>".$hal."</a> ";
+            else echo " <a class='pagination' href='".$_SERVER['PHP_SELF']."?page=$nama_file&hal=".$hal."".$periode."".$cari_data."'>".$hal."</a> ";
 
 
             $showhal = $hal;          

@@ -18,10 +18,10 @@
         </ul>
     </li>
 	<li>
-        <a href="#">DATA PAK</a>
+        <a href="#">DATA PAK </a>
         <ul>
 			<li>
-                <a href="home.php?page=data_pak">Lihat Data PAK</a>
+                <a href="home.php?page=data_pak&periode=<?php echo date('Y')?>" >Lihat Data PAK</a>
             </li>
 			
         </ul>
